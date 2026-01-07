@@ -1,38 +1,226 @@
 /**
- See: CSS Variables
- https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_variables
+ Tic-Tac-Toe Improved Styles
+ CSS Variables for easy customization
 **/
 :root {
     --grid-size: 450px;
     --margin-size: 10px;
     --square-size: calc((var(--grid-size) / 3) - var(--margin-size));
-  }
-  
-  body {
-    font-family: sans-serif;
-  }
-  
-  #grid {
+    --color-x: #e74c3c; /* สีแดงสำหรับ X */
+    --color-o: #3498db; /* สีน้ำเงินสำหรับ O */
+    --color-primary: #667eea;
+    --color-winner: #f1c40f;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.container {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 30px;
+    font-size: 42px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Scoreboard */
+.scoreboard {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 15px;
+}
+
+.score-item {
+    text-align: center;
+}
+
+.score-item h3 {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.score-item p {
+    font-size: 48px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.score-x {
+    color: var(--color-x);
+}
+
+.score-o {
+    color: var(--color-o);
+}
+
+/* Game Status */
+.status {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 25px;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Game Grid */
+#grid {
     align-content: space-between;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     height: var(--grid-size);
     width: var(--grid-size);
-  }
-  
-  #grid div {
+    margin: 0 auto 30px auto;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+#grid div {
     background-color: white;
     height: var(--square-size);
     width: var(--square-size);
-  
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-  
-  #grid div img {
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+#grid div:hover:not(.filled) {
+    background-color: #e9ecef;
+    transform: scale(1.05);
+}
+
+#grid div.filled {
+    cursor: not-allowed;
+}
+
+#grid div img {
+    width: 80%;
+    height: 80%;
+    object-fit: contain;
+    animation: fadeIn 0.3s ease;
+}
+
+/* เปลี่ยนสีของ X และ O */
+#grid div.x-player img {
+    filter: hue-rotate(0deg) saturate(150%) brightness(0.8);
+    /* สีแดงสำหรับ X */
+}
+
+#grid div.o-player img {
+    filter: hue-rotate(180deg) saturate(150%) brightness(1.2);
+    /* สีน้ำเงินสำหรับ O */
+}
+
+/* Winning cells highlight */
+#grid div.winner {
+    background: var(--color-winner) !important;
+    animation: pulse 0.6s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(241, 196, 15, 0.7);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 0 20px 10px rgba(241, 196, 15, 0.3);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.5) rotate(-10deg);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+    }
+}
+
+/* Reset Button */
+.reset-btn {
     width: 100%;
-  }
-  
+    max-width: 300px;
+    padding: 15px 30px;
+    font-size: 20px;
+    font-weight: bold;
+    background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);
+}
+
+.reset-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(46, 204, 113, 0.4);
+}
+
+.reset-btn:active {
+    transform: translateY(0);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    :root {
+        --grid-size: 300px;
+        --margin-size: 8px;
+    }
+
+    h1 {
+        font-size: 32px;
+    }
+
+    .container {
+        padding: 20px;
+    }
+
+    .scoreboard {
+        gap: 30px;
+    }
+
+    .score-item p {
+        font-size: 36px;
+    }
+
+    .status {
+        font-size: 18px;
+    }
+}

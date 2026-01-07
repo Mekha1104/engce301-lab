@@ -1,22 +1,49 @@
-<html>
-  <head>
-    <meta charset="utf-8">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tic-Tac-Toe</title>
-  </head>
-  <body>
-  	<h1>Tic-Tac-Toe</h1>
-  	<div id="grid">
-      <div></div>
-      <div></div>
-      <div></div>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🎮 Tic-Tac-Toe 🎮</h1>
+        
+        <!-- Scoreboard -->
+        <div class="scoreboard">
+            <div class="score-item">
+                <h3>Player X</h3>
+                <p class="score-x" id="scoreX">0</p>
+            </div>
+            <div class="score-item">
+                <h3>Player O</h3>
+                <p class="score-o" id="scoreO">0</p>
+            </div>
+        </div>
 
-      <div></div>
-      <div></div>
-      <div></div>
+        <!-- Game Status -->
+        <div class="status" id="status">Player X's turn</div>
+        
+        <!-- Game Grid -->
+        <div id="grid">
+            <div data-index="0"></div>
+            <div data-index="1"></div>
+            <div data-index="2"></div>
 
-      <div></div>
-      <div></div>
-      <div></div>
-  	</div>
-  </body>
+            <div data-index="3"></div>
+            <div data-index="4"></div>
+            <div data-index="5"></div>
+
+            <div data-index="6"></div>
+            <div data-index="7"></div>
+            <div data-index="8"></div>
+        </div>
+
+        <!-- Reset Button -->
+        <button class="reset-btn" id="resetBtn">🔄 Reset Game</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
 </html>
