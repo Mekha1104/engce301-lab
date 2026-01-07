@@ -1,18 +1,263 @@
 <!DOCTYPE html>
-<html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>คู่มือการพัฒนา Todo List</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      background-color: #f5f5f5;
+      line-height: 1.6;
+    }
+    h1 {
+      color: #2c3e50;
+      text-align: center;
+      border-bottom: 3px solid #3498db;
+      padding-bottom: 15px;
+    }
+    h2 {
+      color: #2980b9;
+      margin-top: 30px;
+      background-color: #ecf0f1;
+      padding: 10px 15px;
+      border-left: 4px solid #3498db;
+    }
+    h3 {
+      color: #16a085;
+      margin-top: 20px;
+    }
+    .step {
+      background-color: white;
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .step-number {
+      background-color: #3498db;
+      color: white;
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-weight: bold;
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+    code {
+      background-color: #f8f9fa;
+      padding: 3px 8px;
+      border-radius: 3px;
+      font-family: 'Courier New', monospace;
+      color: #e74c3c;
+    }
+    pre {
+      background-color: #2c3e50;
+      color: #ecf0f1;
+      padding: 15px;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .feature {
+      background-color: #d4edda;
+      border-left: 4px solid #28a745;
+      padding: 10px 15px;
+      margin: 10px 0;
+    }
+    .warning {
+      background-color: #fff3cd;
+      border-left: 4px solid #ffc107;
+      padding: 10px 15px;
+      margin: 10px 0;
+    }
+    ul {
+      line-height: 2;
+    }
+    li {
+      margin: 10px 0;
+    }
+  </style>
+</head>
 <body>
+  <h1>📝 คู่มือการพัฒนา Todo List แบบครบวงจร</h1>
 
-<p>Click the button to create a Checkbox.</p>
+  <div class="step">
+    <span class="step-number">ขั้นตอนที่ 1</span>
+    <h3>🏗️ สร้างโครงสร้าง HTML</h3>
+    <p>สร้างไฟล์ <code>index.html</code> ที่ประกอบด้วย:</p>
+    <ul>
+      <li>Container สำหรับแสดง Todo List</li>
+      <li>Form สำหรับรับข้อมูล input และปุ่ม Add</li>
+      <li>List (<code>&lt;ul&gt;</code>) สำหรับแสดงรายการงาน</li>
+      <li>เชื่อมโยงไฟล์ CSS และ JavaScript</li>
+    </ul>
+  </div>
 
-<button onclick="myFunction()">Try it</button>
+  <div class="step">
+    <span class="step-number">ขั้นตอนที่ 2</span>
+    <h3>🎨 ออกแบบ CSS</h3>
+    <p>สร้างไฟล์ <code>style.css</code> เพื่อจัดรูปแบบ:</p>
+    <ul>
+      <li>กำหนดสีพื้นหลัง (#f9f9f9) และ font-family</li>
+      <li>จัดรูปแบบ container ให้อยู่กลางหน้าจอ</li>
+      <li>ตกแต่ง input และปุ่ม Add ด้วยสีฟ้า (#2980b9)</li>
+      <li>จัดรูปแบบรายการงาน (list items) ให้เป็นกล่องสีขาว</li>
+      <li>ตกแต่งปุ่ม Delete ด้วยสีแดง (#e74c3c)</li>
+      <li><strong>เพิ่ม style สำหรับงานที่เสร็จแล้ว</strong> - ขีดคร่อมและเปลี่ยนสีข้อความ</li>
+    </ul>
+  </div>
 
-<script>
-function myFunction() {
-  var x = document.createElement("INPUT");
-  x.setAttribute("type", "checkbox");
-  document.body.appendChild(x);
-}
-</script>
+  <div class="step">
+    <span class="step-number">ขั้นตอนที่ 3</span>
+    <h3>⚙️ เตรียม JavaScript พื้นฐาน</h3>
+    <p>สร้างไฟล์ <code>script.js</code> และเริ่มต้นด้วย:</p>
+    <ul>
+      <li>ดึง elements จาก DOM (form, input, button, list)</li>
+      <li>สร้าง array <code>todos</code> สำหรับเก็บข้อมูล</li>
+      <li>สร้างโครงสร้างฟังก์ชันพื้นฐาน: <code>addTodo()</code>, <code>renderTodos()</code></li>
+    </ul>
+  </div>
+
+  <div class="step">
+    <span class="step-number">ขั้นตอนที่ 4</span>
+    <h3>➕ สร้างฟังก์ชัน addTodo()</h3>
+    <p>เพิ่มฟีเจอร์การเพิ่มงานใหม่:</p>
+    <ul>
+      <li>อ่านค่าจาก input และตัดช่องว่างด้วย <code>trim()</code></li>
+      <li><strong>✅ ตรวจสอบความยาวข้อความไม่เกิน 50 ตัวอักษร</strong></li>
+      <li><strong>✅ แสดง alert หากข้อความยาวเกินกำหนด</strong></li>
+      <li>สร้าง object todo ที่มี id (Date.now()), text, และ completed (false)</li>
+      <li>เพิ่มเข้า array todos</li>
+      <li>ล้างค่า input และเรียก <code>renderTodos()</code></li>
+    </ul>
+    
+    <div class="feature">
+      <strong>🔍 การตรวจสอบความยาว:</strong>
+      <pre>if (todoText.length > 50) {
+  alert("ข้อความต้องไม่เกิน 50 ตัวอักษร");
+  return;
+}</pre>
+    </div>
+  </div>
+
+  <div class="step">
+    <span class="step-number">ขั้นตอนที่ 5</span>
+    <h3>🗑️ สร้างฟังก์ชัน deleteTodo(id)</h3>
+    <p>เพิ่มฟีเจอร์การลบงาน:</p>
+    <ul>
+      <li><strong>✅ แสดง confirm dialog เพื่อยืนยันการลบ</strong></li>
+      <li>ถ้าผู้ใช้กด OK ให้ใช้ <code>filter()</code> กรองงานที่ไม่ตรงกับ id ที่ต้องการลบ</li>
+      <li>เรียก <code>renderTodos()</code> เพื่ออัพเดทหน้าจอ</li>
+    </ul>
+    
+    <div class="feature">
+      <strong>⚠️ การยืนยันการลบ:</strong>
+      <pre>const confirmDelete = confirm("คุณต้องการลบงานนี้หรือไม่?");
+if (confirmDelete) {
+  todos = todos.filter((todo) => todo.id !== id);
+  renderTodos();
+}</pre>
+    </div>
+  </div>
+
+  <div class="step">
+    <span class="step-number">ขั้นตอนที่ 6</span>
+    <h3>✔️ สร้างฟังก์ชัน toggleCompleted(id)</h3>
+    <p>เพิ่มฟีเจอร์การทำเครื่องหมายงานเสร็จ:</p>
+    <ul>
+      <li>ใช้ <code>map()</code> วนลูปหา todo ที่ตรงกับ id</li>
+      <li>สลับค่า <code>completed</code> ระหว่าง true และ false</li>
+      <li>เรียก <code>renderTodos()</code> เพื่ออัพเดทหน้าจอ</li>
+    </ul>
+  </div>
+
+  <div class="step">
+    <span class="step-number">ขั้นตอนที่ 7</span>
+    <h3>🖼️ สร้างฟังก์ชัน renderTodos()</h3>
+    <p>เพิ่มฟีเจอร์การแสดงผลรายการงาน:</p>
+    <ul>
+      <li>ล้างรายการเดิมด้วย <code>innerHTML = ""</code></li>
+      <li>วนลูป forEach เพื่อสร้าง element สำหรับแต่ละ todo:
+        <ul>
+          <li>สร้าง <code>&lt;li&gt;</code> (todoItem)</li>
+          <li><strong>✅ สร้าง checkbox ที่แสดงสถานะ completed</strong></li>
+          <li>สร้าง <code>&lt;span&gt;</code> (todoText) สำหรับข้อความ</li>
+          <li>สร้าง <code>&lt;button&gt;</code> (todoDeleteButton)</li>
+        </ul>
+      </li>
+      <li><strong>✅ ถ้า todo.completed เป็น true ให้เพิ่ม class "completed" (จะทำให้ข้อความขีดคร่อม)</strong></li>
+      <li>ผูก event listeners ให้กับ checkbox, todoItem, และปุ่ม Delete</li>
+      <li>เรียง elements: checkbox → text → delete button</li>
+      <li>เพิ่ม todoItem เข้าไปใน todoList</li>
+    </ul>
+    
+    <div class="feature">
+      <strong>☑️ การสร้าง Checkbox:</strong>
+      <pre>const myCheck = document.createElement("INPUT");
+myCheck.setAttribute("type", "checkbox");
+myCheck.checked = todo.completed;
+
+myCheck.addEventListener("click", (event) => {
+  event.stopPropagation();
+  toggleCompleted(todo.id);
+});</pre>
+    </div>
+  </div>
+
+  <div class="step">
+    <span class="step-number">ขั้นตอนที่ 8</span>
+    <h3>🔌 เชื่อมต่อ Event Listeners</h3>
+    <p>ผูก events เพื่อให้แอปทำงานได้:</p>
+    <ul>
+      <li>ผูก <code>submit</code> event กับ form → เรียก <code>addTodo()</code></li>
+      <li>ใช้ <code>event.preventDefault()</code> เพื่อป้องกันการ refresh หน้า</li>
+      <li>เรียก <code>renderTodos()</code> ครั้งแรกเพื่อเตรียมแสดงผล</li>
+    </ul>
+  </div>
+
+  <h2>📋 สรุปฟีเจอร์ที่ปรับปรุง</h2>
+  
+  <div class="feature">
+    <h3>✅ 1. Checkbox พร้อมเครื่องหมายถูก</h3>
+    <p>เมื่อคลิก checkbox หรือคลิกที่รายการงาน จะทำเครื่องหมายถูกและเปลี่ยนสถานะเป็นเสร็จสิ้น</p>
+  </div>
+
+  <div class="feature">
+    <h3>✅ 2. ขีดคร่อมข้อความ</h3>
+    <p>ใช้ CSS <code>text-decoration: line-through</code> กับ class "completed" เพื่อขีดคร่อมข้อความที่เสร็จแล้ว</p>
+  </div>
+
+  <div class="feature">
+    <h3>✅ 3. Confirm Dialog สำหรับการลบ</h3>
+    <p>แสดงกล่องยืนยันด้วย <code>confirm()</code> ก่อนลบงานทุกครั้ง</p>
+  </div>
+
+  <div class="feature">
+    <h3>✅ 4. ตรวจสอบความยาวข้อความ</h3>
+    <p>ตรวจสอบด้วย <code>todoText.length > 50</code> และแสดง alert หากยาวเกิน 50 ตัวอักษร</p>
+  </div>
+
+  <div class="warning">
+    <h3>⚠️ จุดที่ต้องระวัง</h3>
+    <ul>
+      <li>ใช้ <code>event.stopPropagation()</code> กับ checkbox และปุ่ม Delete เพื่อป้องกัน event bubbling</li>
+      <li>ใช้ <code>Date.now()</code> สร้าง unique ID สำหรับแต่ละ todo</li>
+      <li>ใช้ <code>trim()</code> เพื่อตัดช่องว่างหน้าหลังก่อนบันทึก</li>
+      <li>เช็คความยาวข้อความก่อน push เข้า array</li>
+    </ul>
+  </div>
+
+  <h2>🎯 ผลลัพธ์ที่ได้</h2>
+  <p>Todo List ที่สมบูรณ์พร้อมฟีเจอร์:</p>
+  <ul>
+    <li>✅ เพิ่มงานใหม่พร้อมตรวจสอบความยาว (ไม่เกิน 50 ตัวอักษร)</li>
+    <li>✅ ทำเครื่องหมายงานเสร็จด้วย checkbox</li>
+    <li>✅ ขีดคร่อมข้อความงานที่เสร็จแล้ว</li>
+    <li>✅ ยืนยันก่อนลบงานด้วย confirm dialog</li>
+    <li>✅ UI สวยงามและใช้งานง่าย</li>
+  </ul>
 
 </body>
 </html>
